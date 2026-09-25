@@ -19,7 +19,7 @@ style: |
 
 
 
-footer: Outils pour le calcul scientifique 2025 - Introduction à git - Thibault Marzlin, Mayeul Destouches
+footer: Outils pour le calcul scientifique 2026 - Présentation - Thibault Marzlin, Mayeul Destouches
 ---
 <!-- _class: title -->
 
