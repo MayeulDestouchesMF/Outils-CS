@@ -2,7 +2,7 @@
 
 marp: true
 paginate: true
-math: latex 
+math: latex
 
 
 
@@ -14,7 +14,7 @@ style: |
   }
    .columns {
     display: grid;
-    grid-template-columns: 2fr 1fr; 
+    grid-template-columns: 2fr 1fr;
     gap: 1rem;
   }
 
@@ -39,7 +39,7 @@ Le but de ce TP est d'apprendre les bases du langage python de programmation en 
 
 À la fin de ce cours, vous devriez être capable de :
 
-- Importer des modules en Python.
+- Importer des paquets en Python.
 - Utiliser des variables pour stocker des données.
 - Afficher des informations avec `print`.
 - Manipuler des listes.
@@ -49,9 +49,10 @@ Le but de ce TP est d'apprendre les bases du langage python de programmation en 
 
 ---
 
-## **Qu'est-ce qu'un module ?**
+## **Qu'est-ce qu'un paquet Python ?**
 
-Un module est un fichier contenant du code Python pré-écrit que vous pouvez utiliser dans vos propres programmes. Cela permet de réutiliser du code et d'accéder à des fonctionnalités avancées sans les écrire vous-même.
+Un **module** est un fichier contenant du code Python pré-écrit que vous pouvez utiliser dans vos propres programmes. Cela permet de réutiliser du code et d'accéder à des fonctionnalités avancées sans les écrire vous-même.
+Un **paquet** (*package*) est un ensemble de modules organisés.
 
 **Exemple : Importer `numpy`**
 
@@ -141,7 +142,7 @@ Ajoutez la température `18` **au début** de la liste `temperatures` et affiche
 
 ---
 
-Pour ce faire, on va utiliser la méthode `insert` permettant d'insérer un élément à la position voulue.  
+Pour ce faire, on va utiliser la méthode `insert` permettant d'insérer un élément à la position voulue.
 
 ```python
 temperatures.insert(0, 18)
@@ -227,7 +228,7 @@ for i in range(len(temperatures)):
 
 Les fonctions sont des blocs de code réutilisables qui effectuent une tâche spécifique. Elles permettent d'organiser le code de manière modulaire et lisible.
 
-Les fonctions peuvent prendre des paramètres, optionnels ou non, en entrée. 
+Les fonctions peuvent prendre des paramètres, optionnels ou non, en entrée.
 
 ---
 
