@@ -2,7 +2,7 @@
 title: Environnements Virtuels Python
 marp: true
 paginate: true
-math: latex 
+math: latex
 
 style: |
   .same_columns {
@@ -12,7 +12,7 @@ style: |
   }
    .columns {
     display: grid;
-    grid-template-columns: 2fr 1fr; 
+    grid-template-columns: 2fr 1fr;
     gap: 1rem;
   }
 ---
@@ -21,15 +21,15 @@ style: |
 
 ### Qu’est-ce qu’un environnement virtuel Python et pourquoi l’utiliser ?
 
-L’un des grands changements lors du passage de Python 2 à Python 3 est l’utilisation des [environnements virtuels (venv)](https://docs.python.org/3/tutorial/venv.html).  
-L’idée est simple : dans un environnement virtuel, vous pouvez installer un ensemble de bibliothèques exclusives à cet environnement.  
+L’un des grands changements lors du passage de Python 2 à Python 3 est l’utilisation des [environnements virtuels (venv)](https://docs.python.org/3/tutorial/venv.html).
+L’idée est simple : dans un environnement virtuel, vous pouvez installer un ensemble de paquets exclusifs à cet environnement.
 Les venvs évitent les problèmes de compatibilité (moins de soucis avec Python) et facilitent énormément les opérations de support (résolution plus rapide des problèmes).
 
 ---
 
 ##### Diviser pour régner
 
-Lorsque vous travaillez dans un venv, vous limitez le nombre de paquets utilisés.  
+Lorsque vous travaillez dans un venv, vous limitez le nombre de paquets utilisés.
 Lister (`pip list`) et vérifier (`pip check`) est bien plus facile et rapide avec un nombre réduit de paquets.
 
 Pour le support, vous pouvez créer une “carte d’identité” de votre environnement Python, qui est simplement la liste des paquets installés. Plus cette liste est petite, plus le support pourra rapidement recréer exactement le même état que vous, même sur une autre machine.
@@ -40,7 +40,7 @@ Pour le support, vous pouvez créer une “carte d’identité” de votre envir
 
 ##### Prérequis
 
-Commencez par installer Python 3, vous trouverez comment faire sur [python.org/downloads](https://www.python.org/downloads/).  
+Commencez par installer Python 3, vous trouverez comment faire sur [python.org/downloads](https://www.python.org/downloads/).
 Vérifiez que vous utilisez la bonne version de Python avec la commande `which python`.
 
 ##### python -m venv
@@ -142,31 +142,27 @@ Pour cela, assurez-vous d’être dans le même dossier que le setup.py du paque
 ---
 
 ##### Une collection de tutoriels et motivations sur les environnements virtuels
-L’environnement virtuel n’est pas une invention de COOP, mais “la manière recommandée de maîtriser votre framework Python”.
+L’environnement virtuel est “la manière recommandée de maîtriser votre framework Python”.
 Il peut être rapproché de vos premiers contacts avec les variables d’environnement UNIX (`.bashrc`, `module load`, etc.).
-Voici quelques liens pour des explications non-COOP :
+Voici quelques liens utiles :
 
 - [python.org](https://docs.python.org/3/tutorial/venv.html) : la référence absolue sur les venvs.
 
 - [realpython](https://realpython.com/python-virtual-environments-a-primer/) : un tutoriel plus accessible.
 
-- [geeksforgeeks](https://www.geeksforgeeks.org/python-virtual-environment/) : une présentation encore plus courte des venvs.
-
-- [towardsdatascience](https://towardsdatascience.com/why-you-should-use-a-virtual-environment-for-every-python-project-c17dab3b0fd0) : un article non technique expliquant POURQUOI utiliser un venv.
+- [geeksforgeeks](https://www.geeksforgeeks.org/python-virtual-environment/) : une présentation encore plus courte des venvs, mais en utilisant `virtualenv` plutôt que `venv` (qui est plus basique, inclus dans la bibliothèque standard de Python 3)
 
 ---
 
 ### Créer un alias pour activer automatiquement votre venv
 
-Si vous utilisez régulièrement le venv totoro, vous pouvez créer un alias dans votre fichier `.bashrc` afin de l’activer plus rapidement.
-
-Pour cela, on ajoute cette ligne à la fin de notre fichier `~/.bashrc` :
+Si vous utilisez régulièrement le venv totoro, vous pouvez créer un alias afin de l’activer plus rapidement. Pour cela, ajoutez cette ligne à la fin de votre fichier `~/.bashrc` :
 
 ```bash
 alias totoro="source ~/python_venvs/totoro/bin/activate"
 ```
 
-Ensuite, on recharge votre configuration :
+Ensuite, rechargez votre configuration :
 
 ```bash
 source ~/.bashrc
@@ -178,4 +174,4 @@ source ~/.bashrc
 totoro
 ```
 
-Pour activer automatiquement l'environnement virtuel **totoro** et la commande `deactivate` pour le quitter.
+pour activer automatiquement l'environnement virtuel **totoro**, et la commande `deactivate` pour le quitter.
