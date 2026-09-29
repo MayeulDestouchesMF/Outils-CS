@@ -241,10 +241,10 @@ cp: TMP is a directory (not copied).
 test1.txt
 ```
 ---
-## **Déplacer ou renomer des Fichiers/Répertoires: `mv`**
+## **Déplacer ou renommer des Fichiers/Répertoires: `mv`**
 
 
-La commande `mv` permet de déplacer des fichiers et des dossiers.
+La commande `mv` permet de déplacer des fichiers et des dossiers, tout en les renommant si besoin
 
 ```bash
 > mkdir TMP  # Create a dummy void folder
@@ -370,9 +370,9 @@ Ce script `dungeon.sh` est disponible dans le dossier de votre professeur :
 1. Copiez le fichier  `dungeon.sh` depuis le dossier de votre professeur (`/home/newton/ienm2021/chabotv/COURS_CS`) dans le dossier `Test_unix`
 1. Exécutez le script
 1. Si besoin, changez les droits d'acccès (via `chmod` command) pour rendre le fichier exécutable
-1. Comptez combien de fichiers `goblins` il y a dans votre dongeon
+1. Comptez combien de fichiers `goblins.txt` il y a dans votre dongeon
 1. Trouvez l'ensemble des occurences de `prince` et `princess` dans vos fichiers.
-1. Supprimez le dossier du dongeon (sans supprimer le script `dungeon.sh`!
+1. Supprimez le dossier du dongeon (sans supprimer le script `dungeon.sh`)!
 1. Recommencez avec un nouveau dongeon.
 
 ---
@@ -395,8 +395,8 @@ cp /home/newton/ienm2021/chabotv/COURS_CS/dungeon.sh ~/Cours_CS/Test_unix/dungeo
 
 ---
 5.
-Une première option est de "compter" à la main (tapper simplement la commande `tree` dans le dossier.)
-Vous pouvez aussi utiliser un pipe (`|`) pour enchainer avec une autre commande et ne conserver que les lignes contenants `goblins.txt` : ` tree | grep goblins.txt`
+Une première option est de "compter" à la main (taper simplement la commande `tree` dans le dossier.)
+Vous pouvez aussi utiliser un pipe (`|`) pour enchainer avec une autre commande et ne conserver que les lignes contenant `goblins.txt` : ` tree | grep goblins.txt`
 
 Une autre option est d'utiliser la commande `find`:
 ```bash
@@ -416,7 +416,7 @@ Exemple : `tree | grep goblins.txt | wc -l`
 Il est possible (et même encouragé) de créer des alias pour des courtes commandes récurrentes.
 Pour ce faire, il faut éditer le fichier `~/.bashrc` en ajoutant l'alias souhaité.
 
-Ex : On peut par exemple ajouter le repertoire dans lequel les supports de cours seront disponible.
+Ex : On peut par exemple ajouter le répertoire dans lequel les supports de cours seront disponibles.
 ```bash
 alias cdprof='cd /home/newton/ienm2021/chabotv/COURS_CS'
 ```
