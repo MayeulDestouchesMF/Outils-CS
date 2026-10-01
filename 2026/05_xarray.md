@@ -150,9 +150,9 @@ t2m_area = ds["t2m"].sel(latitude=slice(44, 42), longitude=slice(0, 2))
 ----
 # **Solution 2**
 
-1. Via `print(t2m_by_index)` on obtient les coordonées `[51.42,-0.95]`. En entrant ces coordonnées dans google maps, on s'aperçoit qu'il s'agit de Reading et plus spécifiquement du site du  CEP.
+1. Via `print(t2m_by_index)` on obtient les coordonées `[51.42, -0.95]`. En entrant ces coordonnées dans Google maps, on s'aperçoit qu'il s'agit de Reading et plus spécifiquement du site du  CEP.
 
-2. On retrouve la position de Paris via google maps  : `[48.85, 2.35]`
+2. On retrouve la position de Paris via Internet : `[48.85, 2.35]`
 ```python
 t2m_paris_2h = ds["t2m"].sel(latitude=48.85, longitude=2.35, method='nearest')
 print(t2m_paris_2h.values)
@@ -167,7 +167,7 @@ On a selectionné une grille de 200x200, soit 40 000 points de grille.
 
 # **Calculs sur les données**
 
-On peut directement faire des calculs sur un *Dataset* ou sur un *DataArray*
+On peut directement faire des calculs sur un `Dataset` ou sur un `DataArray`
 ```python
 # Moyenne temporelle pour toutes les variables du dataset
 ds_temporal_mean = ds.mean(dim="time")
@@ -176,7 +176,9 @@ ds_std = ds.std(dim=["latitude", "longitude"])
 ```
 **NB** On peut aussi employer directement des fonctions `numpy` sur un `DataArray`.
 ```python
-np.mean(ds["t2m"],axis=0) <=> ds["t2m"].mean(dim="time")
+np.mean(ds["t2m"], axis=0)
+# is equivalent to
+ds["t2m"].mean(dim="time")
 ```
 
 ----
@@ -190,17 +192,17 @@ np.mean(ds["t2m"],axis=0) <=> ds["t2m"].mean(dim="time")
 
 ----
 # **Solution 3**
-1. Les 3 variables (`t2m`, `r2`, `altitudes`)  ont uniquement les dimensions spatiales, i-e `latitude` et `longitude`.
+1. Les 3 variables (`t2m`, `r2`, `altitudes`)  ont uniquement les dimensions spatiales, i.e. `latitude` et `longitude`.
 2.
 ```python
-print(f"La moyenne spatio temorelle sur la zone est : {t2m_area.mean().values}")
+print(f"La moyenne spatio-temporelle sur la zone est : {t2m_area.mean().values}")
 ```
 ----
-# **Visualisation rapide  (via matplotlib)**
+# **Visualisation rapide (via matplotlib)**
 
 **Attention** : On peut uniquement utiliser la fonction de plot sur les **DataArray**.
 
-![bg width:115% right:40%](./figure/Temperature.png)
+![bg width:110% right:40%](./figures/Temperature.png)
 
 ```python
 import matplotlib.pyplot as plt
@@ -237,7 +239,7 @@ plt.show()
 ----
 
 # **Solution 4 : rendu**
-![width:450px](figure/altitude_2D.png) ![width:600px](figure/altitude_3D.png)
+![width:450px](figures/altitude_2D.png) ![width:600px](figures/altitude_3D.png)
 
 ----
 # **Utilisation des masques pour calculer sur des sous domaines**
