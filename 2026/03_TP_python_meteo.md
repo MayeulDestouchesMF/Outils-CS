@@ -35,7 +35,7 @@ section {
 ---
 ## **Objectifs du Cours**
 
-Le but de ce TP est d'apprendre les bases du langage python de programmation en créant un petit programme qui analyse des données météorologiques fictives.
+Le but de ce TP est d'apprendre les bases du langage de programmation Python en créant un petit programme qui analyse des données météorologiques fictives.
 
 À la fin de ce cours, vous devriez être capable de :
 

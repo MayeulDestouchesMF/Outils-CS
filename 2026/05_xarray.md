@@ -13,8 +13,8 @@ paginate: true
 - Xarray est une bibliothèque Python pour la manipulation de données multi-dimensionnelles.
 - Inspirée par **Pandas**, elle facilite l'analyse de données N-dimensionnelles.
 - Elle est idéale pour travailler avec des données météorologiques indexées selon **lat**, **lon**, **time**.
-- Xarray gère différents formats de données utilisés en météorologie (**NetCDF**, grib, zarr) => Permet d'avoir le même code applicatif à l'ouverture du fichier prêt.
-- **Gère et propage** les métadonnées tout du long des calculs.
+- Xarray gère différents formats de données utilisés en météorologie (**NetCDF**, grib, zarr) => Permet d'avoir le même code applicatif prêt à l'ouverture du fichier.
+- **Gère et propage** les métadonnées tout au long des calculs.
 
 ---
 ## **TP**
@@ -40,11 +40,12 @@ import xarray as xr
 # Permet de conserver les attributs après les opérations
 xr.set_options(keep_attrs=True)
 # Ouverture du fichier
-ds = xr.open_dataset("/home/newton/ienm2021/chabotv/COURS_CS/arome_forecast_2024100900.nc")
+ds = xr.open_dataset("/home/newton/horse/destouchesm/COURS_CS/arome_forecast_2024100900.nc")
 #Affiche le contenu du fichier
 print(ds)
 ```
 ----
+<style scoped>section { font-size: 26px; }</style>
 # **Résultat de l'ouverture**
 ```sh
 <xarray.Dataset> Size: 69MB
@@ -78,7 +79,7 @@ Un fichier contenant trois variables :
 Ces variables possèdent des coordonnées (**time**, **latitude**, **longitude**)
 Le fichier, ainsi que l'ensemble des variables et coordonnées, possède des attributs.
 
-**Ex** : `history` renseigne sur la manière dont a été crée le fichier.
+**Ex** : `history` renseigne sur la manière dont a été créé le fichier.
 
 Dans le *vocabulaire* xarray, une variable particulière d'un *Dataset* s'appelle un *DataArray*.
 
@@ -107,21 +108,20 @@ Attributes: (12/30)
 ```python
 print(ds["time"].attrs)
 ```
-
 ----
-# **Selection de données**
-Il y a deux manières principales de selectionner des données :
+# **Sélection de données**
+Il y a deux manières principales de sélectionner des données :
 - par valeur
 ```python
  t2m_toulouse = ds["t2m"].sel(latitude=43.6, longitude=1.43, method="nearest")
 ```
-`method=nearest` pemet de selectionner le point de grille le plus proche.
+`method=nearest` pemet de sélectionner le point de grille le plus proche.
 - par indice
 ```python
 t2m_by_index = ds["t2m"].isel(latitude=198, longitude=705)
 ```
 ----
-# Selection de données : par plage
+# Sélection de données : par plage
 On peut aussi sélectionner via une liste ou des "slices"
 ```python
 t2m_area = ds["t2m"].sel(latitude=slice(44, 42), longitude=slice(0, 2))
@@ -141,7 +141,7 @@ En effet, les latitudes sont rangées de manière décroissante dans ce fichier.
 
 2. Quelle est la température à 2h du matin à Paris ?
 
-3. Combien de point de grille ont été selectionnés par la commande suivante ?
+3. Combien de points de grille ont été sélectionnés par la commande suivante ?
 
 ```python
 t2m_area = ds["t2m"].sel(latitude=slice(44, 42), longitude=slice(0, 2))
@@ -158,10 +158,10 @@ t2m_paris_2h = ds["t2m"].sel(latitude=48.85, longitude=2.35, method='nearest')
 print(t2m_paris_2h.values)
 ```
 3. Voici la première ligne de `print(t2m_area)`
-```sh
+```raw
 xarray.DataArray 't2m' (time: 4, latitude: 200, longitude: 200)
 ```
-On a selectionné une grille de 200x200, soit 40 000 points de grille.
+On a sélectionné une grille de 200x200, soit 40 000 points de grille.
 
 ----
 
@@ -192,7 +192,7 @@ ds["t2m"].mean(dim="time")
 
 ----
 # **Solution 3**
-1. Les 3 variables (`t2m`, `r2`, `altitudes`)  ont uniquement les dimensions spatiales, i.e. `latitude` et `longitude`.
+1. Les 3 variables (`t2m`, `r2`, `altitude`)  ont uniquement les dimensions spatiales, i.e. `latitude` et `longitude`.
 2.
 ```python
 print(f"La moyenne spatio-temporelle sur la zone est : {t2m_area.mean().values}")
@@ -200,7 +200,7 @@ print(f"La moyenne spatio-temporelle sur la zone est : {t2m_area.mean().values}"
 ----
 # **Visualisation rapide (via matplotlib)**
 
-**Attention** : On peut uniquement utiliser la fonction de plot sur les **DataArray**.
+**Attention** : On peut uniquement utiliser la fonction `plot` sur les **DataArray**.
 
 ![bg width:110% right:40%](./figures/Temperature.png)
 
@@ -209,7 +209,7 @@ import matplotlib.pyplot as plt
 ds_temporal_mean["t2m"].plot()
 plt.show()
 ```
-*Bonus* : On a directement accès aux coordonnées sur le plot
+*Bonus* : On a directement accès aux coordonnées sur le graphique.
 
 ----
 # **Exercice 4**
@@ -218,21 +218,22 @@ plt.show()
 ----
 # **Solution 4**
 
-Recherche des coordonnées de grenoble [45.19,5.73] via google maps.
+Recherche des coordonnées de Grenoble [45.19,5.73] via google maps.
 
 ```python
-# selection de la zone
+# sélection de la zone
 delta = 0.5 # On prend 0.5 degré de chaque côté
 altitude_grenoble = ds["altitude"].sel(
   latitude=slice(45.19 + delta, 45.19 - delta),
-  longitude=slice(5.73 - delta, 5.73 + delta))
+  longitude=slice(5.73 - delta, 5.73 + delta)
+  )
 
 # Création d'une carte 2D
-altitude_grenoble.plot(cmap="terrain",vmin=0)
+altitude_grenoble.plot(cmap="terrain", vmin=0)
 plt.show()
 # Création d'une carte 3D
 # Ne fonctionne pas toujours
-altitude_grenoble.plot.surface(cmap="terrain",vmin=0, extend="max")
+altitude_grenoble.plot.surface(cmap="terrain", vmin=0, extend="max")
 plt.show()
 ```
 
@@ -242,10 +243,10 @@ plt.show()
 ![width:450px](figures/altitude_2D.png) ![width:600px](figures/altitude_3D.png)
 
 ----
-# **Utilisation des masques pour calculer sur des sous domaines**
+# **Utilisation de masques pour calculer sur des sous-domaines**
 
-Avec *xarray* (et numpy) On peut aisément créer des masques et les utiliser.
-Cela peut ce faire comme dans l'exemple suivant avec `where` ou par simple multiplication.
+Avec `xarray` (et `numpy`) On peut aisément créer des masques et les utiliser.
+Cela peut se faire comme dans l'exemple suivant avec `where` ou par simple multiplication.
 
 ```python
 mask = ds["altitude"] > 1000
@@ -261,7 +262,7 @@ print(f" Température moyenne des points ayant une altitude supérieure à 1000 
 ----
 
 # **Exercice 5**
-Faite une fonction permettant de  calculer la température moyenne d'une zone donnée pour les points situés au dessus d'une certaine altitude.
+Faites une fonction permettant de  calculer la température moyenne d'une zone donnée pour les points situés au dessus d'une certaine altitude.
 
 ---
 # **Solution 5**
@@ -286,14 +287,14 @@ conditional_mean(ds, lats, lons, altitude)
 
 > 1. Améliorer la fonction de l'exercice 5 de telle sorte à prendre en entrée la variable d'intérêt dans le dataset (par ex. `r2` ou `t2m`)
 
-> 2. Combien y-a-t'il d'occurences de température négative (en °C) dans le dataset entier ? Quel pourcentage de cas cela représente-t-il ?
+> 2. Combien y a-t-il d'occurrences de température négative (en °C) dans le dataset entier ? Quel pourcentage de cas cela représente-t-il ?
 
 >3. Calculer la moyenne glissante (sur 3h) pour la zone autour de Grenoble. (Indication : utiliser la fonctionnalité `rolling` de  *xarray*)
 
 
 
 
-Le dossier `/home/newton/ienm2021/chabotv/COURS_CS/data` contient un fichier `grid_arpege.nc`.
+Le dossier `/home/newton/horse/destouchesm/COURS_CS/data` contient un fichier `grid_arpege.nc`.
 Ce fichier contient une unique variable `glob0125` donnant une information d'altitude sur le domaine AROME pour ARPEGE (modèle global). La résolution de l'orographie est ici de 0.125° (~12.5 km), résolution bien plus lâche que celle d'AROME (~1.3km).
 
 ---

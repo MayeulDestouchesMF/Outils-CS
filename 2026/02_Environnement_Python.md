@@ -48,7 +48,7 @@ Vérifiez que vous utilisez la bonne version de Python avec la commande `which p
 La commande pour installer un environnement virtuel est :
 
 ```bash
-python -m venv -awesome_new_environement-
+python -m venv <awesome_new_environment>
 ```
 
 ---
@@ -59,8 +59,8 @@ Voici un exemple avec le venv **totoro** créé dans un dossier **python_venvs**
 
 ```bash
 Copier le code
-mylogin@mymachine:~>python -m venv ~/python_venvs/totoro
-mylogin@mymachine:~>ls totoro
+mylogin@mymachine:~> python -m venv ~/python_venvs/totoro
+mylogin@mymachine:~> ls totoro
 bin/    include/    lib/    pyvenv.cfg
 ```
 
@@ -72,8 +72,7 @@ Maintenant que vous avez créé votre environnement, vous devez l’activer avan
 Pour activer votre environnement virtuel, utilisez le script `activate` dans le venv :
 
 ```bash
-Copier le code
-mylogin@mymachine:~>source ~/totoro/bin/activate
+mylogin@mymachine:~> source ~/totoro/bin/activate
 (totoro) mylogin@mymachine:~>
 ```
 
@@ -85,15 +84,15 @@ Vous pouvez installer toutes les bibliothèques nécessaires :
 
 ```bash
 Copier le code
-(totoro) mylogin@mymachine:~>pip install numpy
-(totoro) mylogin@mymachine:~>pip install scipy
+(totoro) mylogin@mymachine:~> pip install numpy
+(totoro) mylogin@mymachine:~> pip install scipy
 ```
 Vous pouvez quitter votre environnement virtuel et revenir à l’environnement par défaut avec **deactivate** :
 
 
 ```bash
 Copier le code
-(totoro) mylogin@mymachine:~>deactivate
+(totoro) mylogin@mymachine:~> deactivate
 mylogin@mymachine:~>
 ```
 Les paquets disponibles dans **totoro** ne sont alors plus visibles. Essayez `pip list` pour vérifier.
@@ -109,8 +108,8 @@ Dès la création de votre environnement virtuel, **mettez à jour pip et setupt
 
 ```bash
 Copier le code
-(totoro) mylogin@mymachine:~>pip install --upgrade pip
-(totoro) mylogin@mymachine:~>pip install --upgrade setuptools
+(totoro) mylogin@mymachine:~> pip install --upgrade pip
+(totoro) mylogin@mymachine:~> pip install --upgrade setuptools
 ```
 Ces deux bibliothèques évoluent rapidement, gardez-les à jour pour limiter les problèmes.
 

@@ -34,13 +34,13 @@ section {
 
 ---
 # **Le jeu de données**
-Dans ce TP nous allons commencer à manipuler des données d'observation du réseau de station de MétéoFrance.
+Dans ce TP nous allons commencer à manipuler des données d'observation du réseau de stations de MétéoFrance.
 Le jeu de données utilisé pour ce TP est une sous-partie du jeu de données Meteonet https://meteofrance.github.io/meteonet/french/accueil/
 Il s'agit d'un an de données observées (au pas de temps horaire) sur certaines stations du Nord Ouest de la France.
 
 
 Vous trouverez ce jeu de données sous :
-`/home/newton/ienm2021/chabotv/COURS_CS/data/station_2018.csv`
+`/home/newton/horse/destouchesm/COURS_CS/data/station_2018.csv`
 Inutile de le copier chez vous, vous pouvez directement l'utiliser dans vos scripts python.
 
 ---
@@ -67,7 +67,7 @@ Pour lire et manipuler ce fichier, nous allons utiliser la librairie Pandas.
 ```python
 import pandas as pd
 # Lecture du fichier
-file_path = "/home/newton/ienm2021/chabotv/COURS_CS/data/station_2018.csv"
+file_path = "/home/newton/horse/destouchesm/COURS_CS/data/station_2018.csv"
 df = pd.read_csv(file_path,parse_dates=[4])
 # Affichage des premières lignes du fichier
 print(df.head())
@@ -92,12 +92,12 @@ print(df["number_sta"].unique())
 
 Explications :
 - `df["number_sta"]` permet d'accéder à tous les éléments de la colonne `number_sta`
-- `.unique()` permet d'enlever tous les valeurs en doublons.
+- `.unique()` permet d'enlever toutes les valeurs en doublons.
 
 ---
 # **Exercice**
 
-Combien existe-t-il d'identifiant stations dans ce fichier ?
+Combien existe-t-il d'identifiants de stations dans ce fichier ?
 
 ---
 
@@ -127,14 +127,14 @@ def read_station_data(id_number):
     # Check that the id exists
     if id_number not in df["number_sta"].unique():
         print(f"La station demandée {id_number} n'existe pas.")
-        print(f"Les possibilitées sont {df["number_sta"].unique()}")
+        print(f"Les possibilités sont {df["number_sta"].unique()}")
         raise ValueError(f"Station {id_number} does not exist!")
     # Filter by station number
     return df[df["number_sta"] == id_number]
 ```
 
-- `df["number_sta"] == id_number` permet de savoir si l'élément est associé à la station `id_number`. Cela créé un tableau de booléens.
-- `df[df["number_sta"] == id_number]` retourne uniquement les lignes du fichier csv associé à la station `id_number`.
+- `df["number_sta"] == id_number` permet de savoir si l'élément est associé à la station `id_number`. Cela crée un tableau de booléens.
+- `df[df["number_sta"] == id_number]` retourne uniquement les lignes du fichier csv associées à la station `id_number`.
 
 ---
 # **Amélioration du code précédent**
@@ -161,7 +161,7 @@ def read_station_data(df: pd.DataFrame, id_number: int) -> pd.DataFrame:
   # Check that the id exists
   if id_number not in df["number_sta"].unique():
       print(f"La station demandée {id_number} n'existe pas.")
-      print(f"Les possibilitées sont {df["number_sta"].unique()}")
+      print(f"Les possibilités sont {df["number_sta"].unique()}")
       raise ValueError(f"Station {id_number} does not exist!")
   # Filter by station number
   return df[df["number_sta"] == id_number]
@@ -170,7 +170,7 @@ def read_station_data(df: pd.DataFrame, id_number: int) -> pd.DataFrame:
 ---
 # **Exercice**
 
-Faite une fonction qui affiche les informations propres à la station à savoir :
+Faites une fonction qui affiche les informations propres à la station à savoir :
   - latitude
   - longitude
   - altitude,
@@ -205,9 +205,9 @@ Pour rappel, les colonnes du fichiers sont :
 
 
 ---
-# **Les dates (Apparté)**
+# **Les dates (Aparté)**
 
-Les dates sont des données très particulière. En python, il existe plusieurs classe permettant de les gérer. La plus classique est la classe `datetime`.
+Les dates sont des données très particulière. En python, il existe plusieurs classes permettant de les gérer. La plus classique est la classe `datetime`.
 
 ```python
 import datetime as dt
@@ -221,7 +221,7 @@ print(f"Le cours débute à {start_class} et termine à {end_class}")
     - `dt.timedelta` : Permet d'ajouter ou de retrancher des jours/heures/minutes à une date.
 
 ---
-# **Les dates (Apparté)**
+# **Les dates (Aparté)**
 
 Il est aussi possible d'accéder directement à différents attributs de la date (par exemple l'heure, le jour de la semaine, ... ).
 Pour cela il suffit de faire :
@@ -242,7 +242,7 @@ start_period = dt.datetime(2018, 10, 1)
 end_period = dt.datetime(2018, 10, 15)
 # Recherche des dates satisfaisant les deux conditions
 selected = (df_station.date > start_period) * (df_station.date < end_period)
-# Selection de la bonne période
+# Sélection de la bonne période
 df_period = df_station[selected]
 # Affichage de la dataframe pour les dates sélectionnées
 print(df_period)
@@ -251,7 +251,7 @@ print(df_period)
 ---
 # **Exercice**
 
-Créer une fonction `select_period` permettant de selectionner une sous période d'un dataframe. Ajouter un argument optionnel permettant de selectionner une heure précise de la journée au sein de cette période.
+Créer une fonction `select_period` permettant de sélectionner une sous-période d'un dataframe. Ajouter un argument optionnel permettant de sélectionner une heure précise de la journée au sein de cette période.
 
 
 
@@ -262,7 +262,7 @@ Créer une fonction `select_period` permettant de selectionner une sous période
 def select_period(df, start_period, end_period, hour=None):
     # On reprend l'exemple de la slide précédente
     cdt = (df.date > start_period) * (df.date < end_period)
-    # Mise a jour de la condition pour rajouter la sélection de l'heure
+    # Mise à jour de la condition pour rajouter la sélection de l'heure
     if hour is not None:  # Attention `if hour:` ne fonctionne pas avec 0.
         cdt = cdt * (df.date.dt.hour == hour)
     df_period = df[cdt]
@@ -294,7 +294,7 @@ end_period = dt.datetime(2018, 10, 15)
 df_period = select_period(df_station, start_period, end_period)
 max_temperature = df_period["t"].max()
 
-# Liste des elements ayant atteint cette température maximum.
+# Liste des éléments ayant atteint cette température maximum.
 elt = df_period[df_period["t"] == max_temperature]
 
 print(f"La température maximale sur la période a été de {max_temperature}.")
@@ -323,7 +323,7 @@ print(f"L'heure pour laquelle ce maximum a été atteint est {mean_hour['hour'][
 # **Bonus**
 
 Le problème de la solution précédente vient de l'utilisation d'`index`.
-Cette méthode renvoit la première occurence de la valeur cherchée de la liste.
+Cette méthode renvoie la première occurrence de la valeur cherchée de la liste.
 Il faudrait faire une  boucle explicite recherchant la valeur pour avoir toutes les heures correspondant.
 
 ---
@@ -332,7 +332,7 @@ Il faudrait faire une  boucle explicite recherchant la valeur pour avoir toutes 
 <div>
 
 - Ecrire une fonction prenant en entrée un dataframe,  la variable d'intérêt (`t`,`hu`, `td`, ...) et retournant l'heure du premier maximum et du premier minimum sur la période.
-- Ecrire une fonction prenant en entrée un dataframe, la variable d'intérêt (`t`, `hu`, `td`, ...), la fonction d'aggrégation (`mean`, `max`, `min`) et retournant la valeur aggrégée par heure de la journée
+- Ecrire une fonction prenant en entrée un dataframe, la variable d'intérêt (`t`, `hu`, `td`, ...), la fonction d'agrégation (`mean`, `max`, `min`) et retournant la valeur agrégée par heure de la journée
 - Ecrire une fonction permettant de visualiser la moyenne horaire sur la période
 
 </div>
@@ -363,11 +363,11 @@ def extrema(df: pd.DataFrame, variable: str):
 ```
 
 ---
-# Une solution pour l'aggrégation
+# Une solution pour l'agrégation
 
 ```python
 def aggregation(df:pd.DataFrame, variable:str, method:str):
-    # Création d'une liste pour mettre la donnée aggrégée
+    # Création d'une liste pour mettre la donnée agrégée
     result = []
     for hour in range(0, 24):
         cdt = df.date.dt.hour == hour
@@ -384,7 +384,7 @@ def aggregation(df:pd.DataFrame, variable:str, method:str):
 ```
 
 ---
-# Autre solution pour l'aggrégation
+# Autre solution pour l'agrégation
 ```python
   def aggregated_bis(df, variable, method):
     result = []
@@ -413,7 +413,7 @@ Nous disposons maintenant :
 - d'une fonction permettant d'extraire les données correspondant à une station d'un dataFrame
 - d'une fonction permettant de filtrer une période particulière du jeu de données
 - d'une fonction permettant d'extraire l'heure du maximum et du minimum pour une variable
-- d'une fonction permettant d'aggréger les données d'une période par heure de la journée
+- d'une fonction permettant d'agréger les données d'une période par heure de la journée
 - d'une fonction de visualisation du cycle journalier
 
 Nous verrons lors du prochain cours comment nous pouvons nous en servir pour créer un "objet" station.

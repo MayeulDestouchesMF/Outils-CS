@@ -31,11 +31,11 @@ footer: Outils pour le calcul scientifique 2026 - Introduction à UNIX -  Thibau
 |  | CLI |GUI |
 |:--:|:--:|:---|
 | Utilisation intuitive | Non | Oui |
-| Controle fin des actions | Oui | Généralement non |
+| Contrôle fin des actions | Oui | Généralement non |
 | Utilisation de ressources supplémentaires | Non | Oui |
 | Automatisation aisée | Oui | Non |
 
-L'interpreteur de commande UNIX est dénommé "[Shell](https://en.wikipedia.org/wiki/Shell_(computing))."  Plusieurs co-existent. On utilisera ici `bash` "[Bourne-Again shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell))"
+L'interpréteur de commande UNIX est dénommé "[Shell](https://en.wikipedia.org/wiki/Shell_(computing))."  Plusieurs co-existent. On utilisera ici `bash` "[Bourne-Again shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell))"
 
 
 ---
@@ -46,7 +46,7 @@ L'interpreteur de commande UNIX est dénommé "[Shell](https://en.wikipedia.org/
 
 ## Exploration: La commande `ls`
 
-La commande `ls` permet de lister le contenu d'un repertoire. On ne peut rien casser avec, n'hésitez pas à vous en servir.
+La commande `ls` permet de lister le contenu d'un répertoire. On ne peut rien casser avec, n'hésitez pas à vous en servir.
 
 ```bash
 > ls
@@ -56,7 +56,7 @@ Documents
 ```
 
 ---
-On peut ajuster la command afin d'avoir plus d'information.
+On peut ajuster la commande afin d'avoir plus d'information.
 
 
 ```bash
@@ -75,7 +75,7 @@ drwxr-xr-x  2 chabotv assim 4,0K nov.  25  2024 Documents
 
 ### **Auto-complétion (Sans danger)**
 
-Taper chaque lettre peut être ennuyeux et surtout source d'erreurs. La plupart des terminals permmettent d'utiliser l'auto-complétion via la touche **Tabulation** (dénotée `\t`).
+Taper chaque lettre peut être ennuyeux et surtout source d'erreurs. La plupart des terminaux permettent d'utiliser l'auto-complétion via la touche **Tabulation** (dénotée `\t`).
 Exemple : Arriver au répertoire du cours : `/home/newton/ienm2021/chabotv/COURS_CS`
 ```bash
 > ls /ho\t
@@ -95,7 +95,7 @@ ienm2022
 ### **Caractère générique**
 
 
-Pour accélerer les recherches vous pouvez utilisez des caractères génériques.
+Pour accélérer les recherches vous pouvez utiliser des caractères génériques.
 Utilisez `*` pour n'importe quel groupe de caractères et `?` pour un seul caractère.
 
 ```bash
@@ -108,7 +108,7 @@ Ce que vous avez appris avec `ls` (complétion, caractère générique, options)
 Pour avoir une idée des options d'une commande faites `man MA_COMMANDE`.
 Ex : `man ls`
 
-> Quelle est l'option permettant de trier les fichiers en commançant par les plus volumineux ?
+> Quelle est l'option permettant de trier les fichiers en commençant par les plus volumineux ?
 
 ---
 
@@ -153,15 +153,15 @@ Vous pouvez utiliser les commandes `head ` ou `tail` pour voir le début ou la f
 
 
 ---
-# **Rechercher les occurences d'une chaîne de caractères**
+# **Rechercher les occurrences d'une chaîne de caractères**
 
-Pour effectuer des recherches au sein de fichiers `ascii`, vous pouvez utiliser la commande `grep`.
+Pour effectuer des recherches au sein de fichiers texte, vous pouvez utiliser la commande `grep`.
 
-**Exemple :** Trouver l'ensemble des mots contenants "cumul" dans le dictionnaire
+**Exemple :** Trouver l'ensemble des mots contenant "cumul" dans le dictionnaire
 
 
 ```
-grep cumul /usr/share/dict/words
+> grep cumul /usr/share/dict/words
 ```
 Combien en existe-t-il ?
 
@@ -209,7 +209,7 @@ mkdir: TEST: File exists
 
 ## Copier un fichier/repertoire: `cp`
 
-La commande `cp`  permet de dupliquer des fichiers. On peut utiliser l'option `-i` (interactive) pour des raisons de sécurités : cela demandera confirmation avant d'écraser le fichier.
+La commande `cp`  permet de dupliquer des fichiers. On peut utiliser l'option `-i` (interactive) pour des raisons de sécurité : cela demandera confirmation avant d'écraser le fichier.
 
 
 
@@ -263,7 +263,7 @@ La commande `mv` permet de déplacer des fichiers et des dossiers, tout en les r
 
 ## **Supprimer des fichiers : `rm`**
 
-Une des commandes les plus puissantes et dangereuse : `rm`.
+Une des commandes les plus puissantes et dangereuses : `rm`.
 Dans sa forme la plus simple on supprime un fichier :
 ```bash
 > tree
@@ -285,8 +285,8 @@ Dans sa forme la plus simple on supprime un fichier :
 ---
 ## **Le cas spécifique de `rm -rf *`**
 
-Par déaut  `rm`, ne supprime pas les répertoires mais seulement les fichiers.
-Il faut utiliser l'option `-r` (recursive) pour supprimer un répertoire entier + contenu.
+Par défaut  `rm`, ne supprime pas les répertoires mais seulement les fichiers.
+Il faut utiliser l'option `-r` (recursive) pour supprimer un répertoire entier et son contenu.
 
 ```bash
 > rm -r TMP2
@@ -295,7 +295,7 @@ Il faut utiliser l'option `-r` (recursive) pour supprimer un répertoire entier 
 `rm -rf *`
 L'option `-f` signifie qu'on force la commande à s'exécuter. `-rf` permet donc de supprimer l'ensemble des éléments en dessous du point cible, en enlevant l'ensemble des barrières qui pourraient exister.
 Le caractère générique `*` signifiant "tout ce qu'il y a dans ce dossier".
-Par conséquent les conséquences d'un mauvais usage de cette commande peuvent être important.
+Par conséquent les conséquences d'un mauvais usage de cette commande peuvent être importantes.
 
 
 
@@ -310,7 +310,7 @@ Par conséquent les conséquences d'un mauvais usage de cette commande peuvent �
 ## Editeur de texte
 
 Lorsque vous opérez en local, vous pouvez utilisez des éditeurs de texte graphique pour éditer vos scripts.
-A titre d'example, vous pouvez utiliser `vscode` ou `gedit` pour éditer vos scripts.
+A titre d'exemple, vous pouvez utiliser `vscode` ou `gedit` pour éditer vos scripts.
 
 ```bash
 > code hello.sh
@@ -332,7 +332,7 @@ echo "Hello, World!"
 Une fois le fichier sauvegardé (`ctrl +s `), vérifiez que le fichier est présent puis vous pouvez l'exécuter via
 
 ```bash
-bash hello.sh
+> bash hello.sh
 ```
 
 ---
@@ -353,7 +353,7 @@ bash hello.sh
 
 ---
 # Un peu de manipulation
-Pour cet exercice, vous aller devoir exécuter le script `dungeon.sh`.
+Pour cet exercice, vous allez devoir exécuter le script `dungeon.sh`.
 
 Ce script `dungeon.sh` est disponible dans le dossier de votre professeur :
 ```
@@ -364,51 +364,69 @@ Ce script `dungeon.sh` est disponible dans le dossier de votre professeur :
 
 ---
 
-## Démarrons votre aventre UNIX ! **Ceci est votre première quête :**
+## Démarrons votre aventure UNIX ! **Ceci est votre première quête :**
 
-1. Créez un dossier `Cours_CS` et un sous dossier `Test_unix`. Aller à l'intérieur.
-1. Copiez le fichier  `dungeon.sh` depuis le dossier de votre professeur (`/home/newton/ienm2021/chabotv/COURS_CS`) dans le dossier `Test_unix`
-1. Exécutez le script
-1. Si besoin, changez les droits d'acccès (via `chmod` command) pour rendre le fichier exécutable
-1. Comptez combien de fichiers `goblins.txt` il y a dans votre dongeon
-1. Trouvez l'ensemble des occurences de `prince` et `princess` dans vos fichiers.
-1. Supprimez le dossier du dongeon (sans supprimer le script `dungeon.sh`)!
-1. Recommencez avec un nouveau dongeon.
+1. Créez un dossier `Cours_CS` et un sous-dossier `Test_unix`. Allez à l'intérieur.
+1. Copiez le fichier  `dungeon.sh` depuis le dossier de votre professeur (`/home/newton/ienm2021/chabotv/COURS_CS`) dans le dossier `Test_unix`.
+1. Exécutez le script.
+1. Si besoin, changez les droits d'accès (via la commande `chmod`) pour rendre le fichier exécutable.
+1. Comptez combien de fichiers `goblins.txt` il y a dans votre donjon.
+1. Trouvez l'ensemble des occurrences de `prince` et `princess` dans vos fichiers.
+1. Supprimez le dossier du donjon (sans supprimer le script `dungeon.sh` ! )
+1. Recommencez avec un nouveau donjon.
 
 ---
 
 ## Les réponses
-1. Créer un dossier `Cours_CS` et un sous dossier `Test_unix`. Aller à l'intérieur.
+1. Créer un dossier `Cours_CS` et un sous-dossier `Test_unix`. Aller à l'intérieur.
 ```bash
-cd ~
-mkdir Cours_CS
-cd Cours_CS
-mkdir Test_unix
-cd Test_unix
-pwd
+> cd ~
+> mkdir Cours_CS
+> cd Cours_CS
+> mkdir Test_unix
+> cd Test_unix
+> pwd
 ```
 2.  Copier le fichier  `dungeon.sh` depuis le dossier du professeur (`/home/newton/ienm2021/chabotv/COURS_CS`) dans le dossier `Test_unix`
 
 ```bash
-cp /home/newton/ienm2021/chabotv/COURS_CS/dungeon.sh ~/Cours_CS/Test_unix/dungeon.sh
+> cp /home/newton/ienm2021/chabotv/COURS_CS/dungeon.sh ~/Cours_CS/Test_unix/dungeon.sh
 ```
 
 ---
+<style scoped>section { font-size: 24px; }</style>
 5.
 Une première option est de "compter" à la main (taper simplement la commande `tree` dans le dossier.)
-Vous pouvez aussi utiliser un pipe (`|`) pour enchainer avec une autre commande et ne conserver que les lignes contenant `goblins.txt` : ` tree | grep goblins.txt`
 
-Une autre option est d'utiliser la commande `find`:
+Vous pouvez aussi utiliser un *pipe* (`|`) pour enchaîner avec une autre commande et ne conserver que les lignes contenant `goblins.txt` :
 ```bash
-find . -name goblins.txt
+> tree | grep goblins.txt
 ```
 
-> Vous pouvez aussi utiliser la command `wc` pour faire compter le nombre de ligne dans la réponse au shell à votre place.
-Exemple : `tree | grep goblins.txt | wc -l`
+Voire enchaîner avec une troisième commande, `wc` (*word count*), pour faire compter le nombre de lignes à votre place :
+```bash
+> tree | grep goblins.txt | wc -l
+```
+Ou plus simplement, utiliser l'option `-c` (*count*) de `grep` :
+```bash
+> tree | grep -c goblins.txt
+```
+
 ---
 
-6. Pour effectuer une recherche dans l'ensemble des fichiers du dossier Dungeon vous pouvez utiliser `grep`
-`grep -r prince Dungeon/* `
+Une autre option, plus directe si on connaît la commande, est d'utiliser la commande `find`:
+```bash
+> find -name goblins.txt
+# et pour faire compter le nombre de lignes de la sortie :
+> find -name goblins.txt | wc -l
+```
+
+
+6.
+Pour effectuer une recherche dans l'ensemble des fichiers du dossier Dungeon vous pouvez utiliser `grep` avec l'option *recursive* :
+```bash
+> grep -r prince Dungeon/*
+```
 
 ---
 # **Quelques compléments**
