@@ -262,7 +262,7 @@ print(f" Température moyenne des points ayant une altitude supérieure à 1000 
 ----
 
 # **Exercice 5**
-Faites une fonction permettant de  calculer la température moyenne d'une zone donnée pour les points situés au dessus d'une certaine altitude.
+Faites une fonction permettant de  calculer la température moyenne d'une zone donnée pour les points situés au-dessus d'une certaine altitude.
 
 ---
 # **Solution 5**
@@ -273,7 +273,8 @@ def conditional_mean(ds, lats, lons, altitude):
     pour les points supérieurs à une altitude donnée (altitude).
     """
     mask = ds["altitude"] > altitude
-    mean_da = ds["t2m"].sel(latitude=lats, longitude=lons).where(mask).mean()
+    selection = ds["t2m"].sel(latitude=lats, longitude=lons).where(mask)
+    mean_da = selection.mean()
     print(f"{mean_da.long_name} mean is {str(mean_da.values.round(2))} {mean_da.units}")
 
 lats = slice(46, 44)
@@ -282,6 +283,7 @@ altitude = 500
 conditional_mean(ds, lats, lons, altitude)
 ```
 ---
+<style scoped>section { font-size: 26px; }</style>
 # **Exercices - A rendre**
 
 
@@ -289,13 +291,11 @@ conditional_mean(ds, lats, lons, altitude)
 
 > 2. Combien y a-t-il d'occurrences de température négative (en °C) dans le dataset entier ? Quel pourcentage de cas cela représente-t-il ?
 
->3. Calculer la moyenne glissante (sur 3h) pour la zone autour de Grenoble. (Indication : utiliser la fonctionnalité `rolling` de  *xarray*)
+>3. Calculer la moyenne glissante (sur 3h) pour la zone autour de Grenoble. (Indication : utiliser la fonctionnalité `rolling` de  `xarray`)
 
 
 
-
-Le dossier `/home/newton/horsenm/destouchesm/COURS_CS/data` contient un fichier `grid_arpege.nc`.
-Ce fichier contient une unique variable `glob0125` donnant une information d'altitude sur le domaine AROME pour ARPEGE (modèle global). La résolution de l'orographie est ici de 0.125° (~12.5 km), résolution bien plus lâche que celle d'AROME (~1.3km).
+Le dossier `/home/newton/horsenm/destouchesm/COURS_CS/data` contient un fichier `grid_arpege.nc`. Ce fichier contient une unique variable `glob0125` donnant une information d'altitude sur le domaine AROME pour ARPEGE (modèle global). La résolution de l'orographie est ici de 0.125° (~12.5 km), résolution bien plus lâche que celle d'AROME (~1.3km).
 
 ---
 # **Exercices - A rendre**
