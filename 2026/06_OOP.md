@@ -63,7 +63,7 @@ Lors du précédent TP nous avons défini plusieurs fonctions pour venir lire, f
 
 ```python
 def read_station_data(id_number):
-    file_path = '/home/newton/horse/destouchesm/COURS_CS/data/station_2018.csv'
+    file_path = '/home/newton/horsenm/destouchesm/COURS_CS/data/station_2018.csv'
     df =  pd.read_csv(file_path,parse_dates=[4])
     # Vérification que l'id existe
     if id_number not in df["number_sta"].unique():

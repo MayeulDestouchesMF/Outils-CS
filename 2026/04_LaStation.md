@@ -40,7 +40,7 @@ Il s'agit d'un an de données observées (au pas de temps horaire) sur certaines
 
 
 Vous trouverez ce jeu de données sous :
-`/home/newton/horse/destouchesm/COURS_CS/data/station_2018.csv`
+`/home/newton/horsenm/destouchesm/COURS_CS/data/station_2018.csv`
 Inutile de le copier chez vous, vous pouvez directement l'utiliser dans vos scripts python.
 
 ---
@@ -67,7 +67,7 @@ Pour lire et manipuler ce fichier, nous allons utiliser la librairie Pandas.
 ```python
 import pandas as pd
 # Lecture du fichier
-file_path = "/home/newton/horse/destouchesm/COURS_CS/data/station_2018.csv"
+file_path = "/home/newton/horsenm/destouchesm/COURS_CS/data/station_2018.csv"
 df = pd.read_csv(file_path,parse_dates=[4])
 # Affichage des premières lignes du fichier
 print(df.head())

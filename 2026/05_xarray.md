@@ -40,7 +40,7 @@ import xarray as xr
 # Permet de conserver les attributs après les opérations
 xr.set_options(keep_attrs=True)
 # Ouverture du fichier
-ds = xr.open_dataset("/home/newton/horse/destouchesm/COURS_CS/arome_forecast_2024100900.nc")
+ds = xr.open_dataset("/home/newton/horsenm/destouchesm/COURS_CS/arome_forecast_2024100900.nc")
 #Affiche le contenu du fichier
 print(ds)
 ```
@@ -294,7 +294,7 @@ conditional_mean(ds, lats, lons, altitude)
 
 
 
-Le dossier `/home/newton/horse/destouchesm/COURS_CS/data` contient un fichier `grid_arpege.nc`.
+Le dossier `/home/newton/horsenm/destouchesm/COURS_CS/data` contient un fichier `grid_arpege.nc`.
 Ce fichier contient une unique variable `glob0125` donnant une information d'altitude sur le domaine AROME pour ARPEGE (modèle global). La résolution de l'orographie est ici de 0.125° (~12.5 km), résolution bien plus lâche que celle d'AROME (~1.3km).
 
 ---
