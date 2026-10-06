@@ -55,20 +55,22 @@ Nous allons notamment voir :
 
 Pour ce TP il vous faudra installer pandas et matplotlib.
 1. Activer l'environnement virtuel créé lors du dernier TP.
-2. Faire ensuite
+2. Y installer les paquest nécessaires :
   ```sh
   pip install pandas matplotlib
   ```
 ---
 # **Lecture et ouverture du fichier**
 
-Pour lire et manipuler ce fichier, nous allons utiliser la librairie Pandas.
-
+Pour lire et manipuler ce fichier, nous allons utiliser la librairie `pandas`.
+Cette librairie permet de lire, écrire et maniupler des données tabulaires, stockées par pandas sous la forme de *DataFrames* (tableaux à double entrée).
 ```python
 import pandas as pd
+
 # Lecture du fichier
 file_path = "/home/newton/horsenm/destouchesm/COURS_CS/data/station_2018.csv"
-df = pd.read_csv(file_path,parse_dates=[4])
+df = pd.read_csv(file_path, parse_dates=[4])
+
 # Affichage des premières lignes du fichier
 print(df.head())
 ```
@@ -82,7 +84,7 @@ Le fichier csv contient 12 colonnes :
 # **Accéder aux identifiants d'une station**
 
 Le dataFrame marche dans un certain sens comme un dictionnaire.
-Pour accéder à une colonne, on va utiliser une des 12 clés disponibles
+Pour accéder à une colonne, on peut utiliser une des 12 clés disponibles :
 ```python
 # Affichage des stations
 print(df["number_sta"])
@@ -170,10 +172,10 @@ def read_station_data(df: pd.DataFrame, id_number: int) -> pd.DataFrame:
 ---
 # **Exercice**
 
-Faites une fonction qui affiche les informations propres à la station à savoir :
+Faites une fonction qui affiche les informations propres à une station à savoir :
   - latitude
   - longitude
-  - altitude,
+  - altitude
 
 
 ---
@@ -194,7 +196,7 @@ Votre station a-t-elle bougé dans l'année ?
 
 # **Question**
 
-Dans le code suivant, que signifie d'après vous l'argument `parse_dates=[4]`  ?
+Dans le code suivant, que signifie d'après vous l'argument `parse_dates=[4]` ?
  ```python
 df = pd.read_csv(file_path, parse_dates=[4])
  ```
