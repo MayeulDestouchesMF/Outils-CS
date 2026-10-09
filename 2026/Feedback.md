@@ -10,6 +10,7 @@
 - Je trouverais plus naturel d'introduire `pwd` et `~` avant `ls`.
 
 # 02 - Venv (30' max)
+- Pour éviter les confusions, donner un autre nom à l'alias : alias go_totoro="..."
 
 # 03 - Python et Numpy
 
@@ -23,5 +24,6 @@
 - Nuancer le problème de lire plusieurs stations : pandas est intelligent et ne relis pas 1000 fois le même fichier (un mécanisme de mémoire cache peut-être)
 - Rappeler dans les dates qu'il n'y a que 2018
 - Les réponses sur la fin ne répondent pas vraiment aux questions. Les questions pourraient être réordonnées d'ailleurs.
-- La réponse est dans le pdf "student" pour le premier exercice
+- La réponse est dans le pdf "student" pour le premier exercice, à enlever
 - "t", "hu", "max", "min" entre double quotes
+- Rename "aggregation()" -> "aggregate()"
