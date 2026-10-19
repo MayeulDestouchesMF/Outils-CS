@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 """
-Correction of TP 4 - First part
+Correction of TP 4
 """
 
 
@@ -16,7 +16,7 @@ def read_station_data(df: pd.DataFrame, id_number: int) -> pd.DataFrame:
     # Check that the id does exist.
     if id_number not in df["number_sta"].unique():
         print(f"La station demandée {id_number} n'existe pas.")
-        print(f"Les possibilitées sont {df['number_sta'].unique()}")
+        print(f"Les possibilités sont {df['number_sta'].unique()}")
         raise ValueError(f"Station {id_number} does not exist!")
     # Filter rows based on station number
     return df[df["number_sta"] == id_number]
@@ -84,7 +84,7 @@ print(
 hours = []
 mean_temp = []
 # Compute average for each hour
-for hour in range(0, 24):
+for hour in range(24):
     df_period = select_period(df_station, start_period, end_period, hour=hour)
     hours.append(hour)
     mean_temp.append(df_period["t"].mean())
@@ -121,7 +121,7 @@ def aggregate(df: pd.DataFrame, variable: str, method: str) -> list[float]:
     aggregation method.
     """
     result = []
-    for hour in range(0, 24):
+    for hour in range(24):
         condition = df.date.dt.hour == hour
         df_selected = df[condition]
         print("hour:", hour, "size:", df_selected.size, "head:", df_selected.head())
@@ -142,7 +142,7 @@ def aggregate_bis(df: pd.DataFrame, variable: str, method: str) -> list[float]:
     aggregation method.
     """
     result = []
-    for hour in range(0, 24):
+    for hour in range(24):
         cdt = df.date.dt.hour == hour
         df_selected = df[cdt]
         if method in ["mean", "max", "min"]:

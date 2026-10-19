@@ -1,22 +1,22 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 
-def read_station_data(id_number):
+def read_station_data(station_id: int):
     file_path = "/Users/sagarra/Downloads/Fichier_Meteo/station_2018.csv"
     df = pd.read_csv(file_path, parse_dates=[4])
     # Verification que l'id existe
-    if id_number not in df["number_sta"].unique():
-        print(f"La station demandée {id_number} n'existe pas.")
+    if station_id not in df["number_sta"].unique():
+        print(f"La station demandée {station_id} n'existe pas.")
         print(f"Les possibilitées sont {df['number_sta'].unique()}")
-        raise ValueError("Station {id_number} does not exist!")
+        raise ValueError("Station {station_id} does not exist!")
     # Lecture et filtrage
-    return df[df["number_sta"] == id_number]
+    return df[df["number_sta"] == station_id]
 
 
-def print_station_info(df: pd.DataFrame, id_number: int):
-    print(f" Information pour la station {id_number}")
+def print_station_info(df: pd.DataFrame, station_id: int):
+    print(f" Information pour la station {station_id}")
     print(f" Latitude de la station : {df['lat'].unique()}")
     print(f" Longitude de la station : {df['lon'].unique()}")
     print(f" Hauteur de la station : {df['height_sta'].unique()}")
@@ -74,8 +74,8 @@ def visualize(x_value, y_value, axis_labels=["X", "Y"]):
 
 
 class StationMeteo:
-    def __init__(self, id_number):
-        self.id = id_number
+    def __init__(self, station_id):
+        self.id = station_id
         self.df = read_station_data(self.id)
         self.df_period = self.df
 
@@ -121,8 +121,8 @@ visualize(range(24), mean_T, axis_labels=["Heure", "Température moyenne"])
 
 #### RESEAU
 class StationMeteoAb:
-    def __init__(self, id_number, df):
-        self.id = id_number
+    def __init__(self, station_id, df):
+        self.id = station_id
         self.df = df
         self.df_period = self.df
 
@@ -153,12 +153,12 @@ class Reseau:
 
     def _load_stations(self):
         df = pd.read_csv(self.file_path, parse_dates=[4])
-        for id_number in df["number_sta"].unique():
-            station_df = df[df["number_sta"] == id_number]
-            self.stations[id_number] = StationMeteoAb(id_number, station_df)
+        for station_id in df["number_sta"].unique():
+            station_df = df[df["number_sta"] == station_id]
+            self.stations[station_id] = StationMeteoAb(station_id, station_df)
 
-    def get_station(self, id_number):
-        return self.stations.get(id_number)
+    def get_station(self, station_id):
+        return self.stations.get(station_id)
 
     def info(self):
         for id in self.stations:
