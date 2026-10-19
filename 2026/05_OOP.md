@@ -62,38 +62,41 @@ Lors du précédent TP nous avons défini plusieurs fonctions pour venir lire, f
 **Références pour les fonctions:**
 
 ```python
-def read_station_data(id_number):
-    """ Returns a filtered dataframe with data from the required station only.
-    """
-    file_path = '/home/newton/horsenm/destouchesm/COURS_CS/data/station_2018.csv'
-    df =  pd.read_csv(file_path, parse_dates=[4])
-    # Check that the id does exist
-    if id_number not in df["number_sta"].unique():
-        print(f"La station demandée {id_number} n'existe pas.")
-        print(f"Les possibilités sont {df["number_sta"].unique()}")
-        raise ValueError("Station {id_number} does not exist!")
+def read_station_data(station_id: int):
+    """Returns a filtered dataframe with data from the required station only."""
+    file_path = "/home/newton/horsenm/destouchesm/COURS_CS/data/station_2018.csv"
+    df = pd.read_csv(file_path, parse_dates=[4])
+    # Check that the id does exist.
+    if station_id not in df["number_sta"].unique():
+        print(f"La station demandée {station_id} n'existe pas.")
+        print(f"Les possibilités sont {df['number_sta'].unique()}")
+        raise ValueError(f"Station {station_id} does not exist!")
     # Filter rows based on station number
-    return df[df["number_sta"] == id_number]
+    return df[df["number_sta"] == station_id]
 
-def print_station_info(df: pd.DataFrame):
-    """ Find and print information on the location of a given station.
-    """
-    print(f" Information pour la station {id_number}")
-    print(f" Latitude de la station : {data["lat"].unique()}")
-    print(f" Longitude de la station : {data["lon"].unique()}")
-    print(f" Hauteur de la station : {data["height_sta"].unique()}")
+def print_station_info(station_id: int):
+    """Find and print information on the location of a given station."""
+    print(f" Information pour la station {station_id}")
+    print(f" Latitude de la station : {data['lat'].unique()}")
+    print(f" Longitude de la station : {data['lon'].unique()}")
+    print(f" Hauteur de la station : {data['height_sta'].unique()}")
 
-def select_period(df: pd.DataFrame, start_period: dt.datetime, end_period: dt.datetime, hour: int | None = None):
+def select_period(
+    df: pd.DataFrame,
+    start_period: dt.datetime,
+    end_period: dt.datetime,
+    hour: int | None = None,
+):
     """
     Returns a filtered dataframe with dates between `start_period` and `end_period`.
     If `hour` is provided, adds an additional filtering to return only data at
     this hour of the day.
     """
-    cdt = (df.date > start_period) * (df.date < end_period)
+    condition = (df.date >= start_period) * (df.date <= end_period)
     # Update condition to add hour selection
     if hour is not None:  # Caution! `if hour:` would not work (when hour==0)
-        cdt = cdt * (df.date.dt.hour == hour)
-    df_period = df[cdt]
+        condition = condition * (df.date.dt.hour == hour)
+    df_period = df[condition]
     return df_period
 
 def extrema(df: pd.DataFrame, variable: str):
@@ -104,20 +107,20 @@ def extrema(df: pd.DataFrame, variable: str):
     maxi = df[variable].max()
     mini = df[variable].min()
     # Filter to keep only elements where maximum has been reached.
-    max_date =  df[df[variable] == maxi]
+    max_date = df[df[variable] == maxi]
     # Same for minimum.
-    min_date =  df[df[variable] == mini]
+    min_date = df[df[variable] == mini]
     max_hour = max_date["date"].dt.strftime("%H").values[0]
     min_hour = min_date["date"].dt.strftime("%H").values[0]
     return (max_hour, min_hour)
 
-def aggregation(df: pd.DataFrame, variable: str, method: str="mean"):
+def aggregation(df: pd.DataFrame, variable: str, method: str = "mean"):
     """
     Return mean, min or max the required variable, depending on the chosen
     aggregation method.
     """
     result = []
-    for hour in range(0, 24):
+    for hour in range(24):
         cdt = df.date.dt.hour == hour
         df_selected = df[cdt]
         if method == "mean":
@@ -130,9 +133,8 @@ def aggregation(df: pd.DataFrame, variable: str, method: str="mean"):
             raise ValueError("Aggregation method not known")
     return result
 
-def visualize(x_value, y_value, axis_labels=['X', 'Y']):
-    """Plot the y vs x values on a graph with the possibility of specified axis labels
-    """
+def visualize(x_value, y_value, axis_labels=["X", "Y"]):
+    """Plot the y vs x values on a graph with the possibility of specified axis labels"""
     plt.plot(x_value, y_value)
     plt.xlabel(axis_labels[0])
     plt.ylabel(axis_labels[1])
@@ -153,7 +155,7 @@ print_station_info(df_station_73010, station_id)
 df_station_73010_oct = select_period(df_station_73010, "2018-10-1", "2018-10-15")
 h_temp_max, h_temp_min = extrema(df_station_73010_oct, "t")
 mean_temp = aggregation(df_station_73010_oct, "t", method="mean")
-visualize(range(len(mean_temp)), mean_temp, axis_labels=["Heure de la journée", "Temperature Moyenne"])
+visualize(range(len(mean_temp)), mean_temp, axis_labels=["Heure de la journée", "Température Moyenne"])
 ```
 Quels sont les défauts d'un tel script ?
 
@@ -167,7 +169,7 @@ print_station_info(df_station_73010, station_id)
 df_station_73010_oct = select_period(df_station_73010, "2018-10-1", "2018-10-15")
 h_temp_max, h_temp_min = extrema(df_station_73010_oct, "t")
 mean_temp = aggregation(df_station_73010_oct, "t", method="mean")
-visualize(range(len(mean_temp)), mean_temp, axis_labels=["Heure", "Temperature Moyenne"])
+visualize(range(len(mean_temp)), mean_temp, axis_labels=["Heure", "Température Moyenne"])
 ```
 - Répétition des arguments (id, df) à chaque appel.
 
@@ -186,7 +188,7 @@ visualize(range(len(mean_temp)), mean_temp, axis_labels=["Heure", "Temperature M
 L'API idéale pourrait ressembler à cela:
 
 ```python
-station_73 = StationMeteo(id_number=73010)
+station_73 = StationMeteo(station_id=73010)
 station_73.set_period("2018-10-1", "2018-10-15")
 h_max, h_min = station_73.extrema("t")
 mean_T = station_73.aggregate('t', method='mean')
@@ -196,7 +198,7 @@ visualize(range(24), mean_T, axis_labels=["Heure", "Température moyenne"])
 - `station_73` est un *objet* `StationMeteo()` défini pour la station 73010.
 - Cela s'appelle une *instance* de l'objet `StationMeteo`.
 - `.set_period()` est une *méthode* de l'objet qui remplace la fonction  `select_period()`.
-- Ce qui rend cet objet unique est son *attribut* `id_number`.
+- Ce qui rend cet objet unique est son *attribut* `station_id`.
 
 ---
 
@@ -205,16 +207,16 @@ On définit une *classe*:
 
 ```python
 class StationMeteo:
-    def __init__(self, id_number: int):
-        self.id_number = id_number
-        self.df = read_station_data(self.id_number)
+    def __init__(self, station_id: int):
+        self.station_id = station_id
+        self.df = read_station_data(self.station_id)
         self.df_period = self.df
 
     def set_period(self, start, end):
         self.df_period = select_period(self.df, start, end)
 
     def info(self):
-        print_station_info(self.df_period, self.id_number)
+        print_station_info(self.df_period, self.station_id)
 
     def extrema(self, var: str):
         return extrema(self.df_period, var)
@@ -227,27 +229,27 @@ class StationMeteo:
 
 Cette classe possède une méthode d'initialisation `__init__()`:
 ```python
-    def __init__(self, id_number):
-        self.id_number = id_number
-        self.df = read_station_data(self.id_number)
+    def __init__(self, station_id):
+        self.station_id = station_id
+        self.df = read_station_data(self.station_id)
         self.df_period = self.df
 ```
 Ainsi que plusieurs méthodes dont:
 ```python
     def info(self):
-        print_station_info(self.df_period, self.id_number)
+        print_station_info(self.df_period, self.station_id)
 ```
-Les méthodes sont comme des super fonctions qui, lorsqu'elles sont définies dans une classe, peuvent utiliser des attributs comme ici `self.id_number` qui sont des paramètres spécifiques de l'objet.
+Les méthodes sont comme des super fonctions qui, lorsqu'elles sont définies dans une classe, peuvent utiliser des attributs comme ici `self.station_id` qui sont des paramètres spécifiques de l'objet.
 
 
 ---
 ## Exercice
 
-- Mettre en place la classe `StationMeteo` dans le script et exécuter une procédure d'appel complète avec instanciation d'un objet `StationMeteo` pour la station 22219003 et la visualisation de la temperature moyenne pour chaque heure sur la période du 1er au 5 février 2018.
+- Mettre en place la classe `StationMeteo` dans le script et exécuter une procédure d'appel complète avec instanciation d'un objet `StationMeteo` pour la station 22219003 et la visualisation de la température moyenne pour chaque heure sur la période du 1er au 5 février 2018.
 
 - Même demande pour la température maximale sur la période estivale.
 
-- Ajouter la possibilité d'exporter sous forme de .csv les données  de l'objet station, avec l'option de spécifier une période.
+- Ajouter la possibilité d'exporter sous forme de .csv les données de l'objet station, avec l'option de sauver la période en cours d'étude seulement.
 
 ---
 <style scoped>section { font-size: 26px; }</style>
@@ -269,9 +271,9 @@ Méthode de la classe StationMeteo pour l'export:
 ```python
 def export(self, period=False):
         if not period:
-            self.df.to_csv(f"station_{self.id_number}.csv")
+            self.df.to_csv(f"station_{self.station_id}.csv")
         else:
-            self.df_period.to_csv(f"station_{self.id_number}.csv")
+            self.df_period.to_csv(f"station_{self.station_id}.csv")
 ````
 ---
 ## Vers un objet Reseau
@@ -285,7 +287,7 @@ Bien que notre objet `StationMeteo` réponde désormais à nos besoins, traiter 
 
 - Mettre en place une méthode permettant d'afficher les informations des différentes stations du réseau.
 
-- Bonus: Ajouter la possibilité de filtrer la période sur tout le réseau
+- Bonus : Ajouter la possibilité de filtrer la période sur tout le réseau
 ---
 ```python
 class Reseau:
@@ -296,11 +298,11 @@ class Reseau:
 
     def _load_stations(self):
         df = pd.read_csv(self.file_path, parse_dates=[4])
-        for id_number in df["number_sta"].unique():
-            self.stations[id_number] = Station(id_number, station_df)
+        for station_id in df["number_sta"].unique():
+            self.stations[station_id] = Station(station_id, station_df)
 
-    def get_station(self, id_number: int):
-        return self.stations.get(id_number)
+    def get_station(self, station_id: int):
+        return self.stations.get(station_id)
 
     def info(self):
         for id in self.stations:
