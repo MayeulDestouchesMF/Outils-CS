@@ -27,3 +27,13 @@
 - La réponse est dans le pdf "student" pour le premier exercice, à enlever
 - "t", "hu", "max", "min" entre double quotes
 - Rename "aggregation()" -> "aggregate()"
+- Incertitude sur la période à regarder : dire à la première apparition de la période : dans cet exercice *et les suivants*. Ou préciser "période de votre choix" dans les derniers exos
+- Question sur le premier max pas clair : dire "date/heure où la température maximale de la période est atteinte pour la première fois"
+
+# 05 - Object-oriented programmation
+- Have a python script ready to be used as a starter (what is already on slides, in py format)
+- Exercice Reseau : indiquer qu'on peut s'inspirer de l'exemple plus loin pour savoir quelles fonctionnalités le réseau doit implémenter. Correction : remplacer id par station_id
+- Général : trop abrupt, pas assez progressif et pas assez de contenu théorique. La difficulté de la gestion des csv/dataframes se rajoute à la difficulté de la découverte des objets. Rajouter une planche intermédiaire ou deux, avec une classe sans méthodes, une classe avec juste un constructeur...  Sinon, les orienter vers un cours en ligne, type openclassroom ou courspython.com.
+- Mettre en gras les mots à retenir : classe, instance, attribut de données, méthode, constructeur
+- Commenter la majuscule en première lettre des noms de classe, sur la portée des définitions (scope), sur la notion d'attribut 'privé' ou 'protégé'.
+- Montrer en fin de cours ce que donne `dir(ma_station)`. Leur montrer qu'un dataframe est aussi un objet.
