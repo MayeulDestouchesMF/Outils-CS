@@ -221,11 +221,12 @@ Vous devriez avoir ce type de résultat
 # **D. Ajouter les modifications**
 
 
-On va "ajouter" les modifications apportées au fichier et  associer un message de "suivi".
+Pour indiquer quelles modifications on souhaite sauvegarder, on les ajoutent à la **zone d'indexation** (**_staging area_**).
+Elles sont ensuite sauvegardées à l'aide d'un **_commit_** (**validation** en français), associé à un message de "suivi".
 
 ```
 git add slides/LeNomDeMonFichier.pdf
-git status  # Pour vérifier ce qui va être enregistré dans le "commit"
+git status  # Pour vérifier ce qui va être enregistré dans le commit
 git commit -m "Description courte des changements"
 ```
 
@@ -265,8 +266,10 @@ Attention : <span style="color:red">En cas de conflit (deux utilisateurs modifia
 # **La notion de branche dans Git**
 
 ### Qu'est-ce qu'une branche ?
-- Une **branche** est une version parallèle de votre projet.
-- Elle permet de travailler sur de nouvelles fonctionnalités ou corrections de bugs **sans affecter la branche principale** (souvent nommée `main` ou `master`). Ainsi, on isole les bugs du développement de la branche principale. Cette dernière doit rester fonctionnelle tout au long du projet. - Chaque branche possède son propre historique de commits.
+- Techniquement, une **branche** est juste un pointeur vers un commit.
+- En pratique, une **branche** est une version parallèle de votre projet.
+- Elle permet de travailler sur de nouvelles fonctionnalités ou corrections de bugs **sans affecter la branche principale** (souvent nommée `main` ou `master`). Ainsi, on n'introduite pas de bugs dans la branche principale. Cette dernière doit rester fonctionnelle tout au long du projet.
+- Chaque branche possède son propre historique de commits.
 
 ---
 # **Pourquoi utiliser des branches ?**
@@ -435,21 +438,26 @@ Lorsque vous envisagez d'en créer une, commencer par regarder si une issue simi
 
 ---
 <style scoped>section { font-size: 26px; }</style>
-# **Bonus : commandes pour se repérer**
+# **Bonus : Commandes utiles**
 
-La plus basique, à user sans modération :
-```
-git status
-```
-Pour voir les branches et les remotes associés :
-```
-git branch -vv
-```
-Un `git log` plus compact et sympathique :
-```
-git log --all --oneline --graph
-```
-Pour pouvoir y accéder sous l'alias `git lg`:
-```
-git config --global alias.lg "log --all --oneline --graph"
-```
+La plus basique, à user sans modération : `git status`
+
+Pour voir plus en détail ce qui a été modifié dans l'espace de travail : `git diff`
+
+Pour voir les branches et les remotes associés : `git branch -vv`
+
+Un `git log` plus compact et sympathique : `git log --all --oneline --graph`
+Création d'un alias `git lg` : `git config --global alias.lg "log --all --oneline --graph"`
+
+Pour ajouter interactivement des modifications dans la zone d'indexation (_staging area_), paragraphe par paragraphe : `git add -p <file>`
+
+Pour annuler interactivement des modifications : `git restore -p <file>`
+
+---
+
+# **Bonus 2: Ressources**
+
+- Documentation officielle de git : https://git-scm.com/docs
+- Infos rapides sur une commande, par exemple `git add` : `tldr git add` (`tldr` s'installe avec `pip` ou `uv` et fonctionne pour la plupart des commandes linux, moins exhaustif et plus concis que `man`.)
+- Si vous avez un problème avec git, il est virtuellement certains que d'autres l'ont eu avant vous et que la solution est documentée en ligne, par exemple sur stackoverflow
+- VSCode interagit naturellement avec git : https://code.visualstudio.com/docs/sourcecontrol/overview
