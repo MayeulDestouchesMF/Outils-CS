@@ -33,7 +33,11 @@
 # 05 - Object-oriented programmation
 - Have a python script ready to be used as a starter (what is already on slides, in py format)
 - Exercice Reseau : indiquer qu'on peut s'inspirer de l'exemple plus loin pour savoir quelles fonctionnalités le réseau doit implémenter. Correction : remplacer id par station_id
+- Remplacer Reseau par ReseauMeteo ?
 - Général : trop abrupt, pas assez progressif et pas assez de contenu théorique. La difficulté de la gestion des csv/dataframes se rajoute à la difficulté de la découverte des objets. Rajouter une planche intermédiaire ou deux, avec une classe sans méthodes, une classe avec juste un constructeur...  Sinon, les orienter vers un cours en ligne, type openclassroom ou courspython.com.
 - Mettre en gras les mots à retenir : classe, instance, attribut de données, méthode, constructeur
 - Commenter la majuscule en première lettre des noms de classe, sur la portée des définitions (scope), sur la notion d'attribut 'privé' ou 'protégé'.
 - Montrer en fin de cours ce que donne `dir(ma_station)`. Leur montrer qu'un dataframe est aussi un objet.
+
+# 06 - xarray
+- Remove str in {} in f-string
