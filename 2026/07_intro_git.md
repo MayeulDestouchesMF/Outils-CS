@@ -150,22 +150,23 @@ Avec `store` au lieu de `cache --timeout=3600`, le password ne vous sera demand�
 - Générer un token et l'ajouter dans la configuration du dépôt (slide suivante)
 
 ---
-<style scoped>section { font-size: 25px; }</style>
+<style scoped>section { font-size: 24px; }</style>
 # **Génération de token**
-<div class="columns">
-<div>
 
+![width:800](figures/PAT_annotated_top.png)
+![width:800](figures/PAT_annotated_bottom.png)
 
-![width:50%](figures/TokenAn.png)
-</div>
-<div>
+5. Sélectionnez "Ancien jeton"
+6. Choisissez un nom pour le token (celui de votre ordinateur par exemple)
+7. Cochez toutes les permissions
+5. Copiez le token généré (il ne vous sera pas redonné).
 
-## 2.
-Copier le token généré (il ne vous sera pas redonné).
-</div>
-</div>
+---
 
-###  Vous pouvez ensuite l'ajouter en modifiant le fichier `.git/config`
+# **Utilisation du token**
+
+Vous pouvez maintenant ajouter votre token en modifiant le fichier `.git/config` dans le répertoire du projet.
+
 ```
 [remote "origin"]
         url = https://git.meteo.fr/MyPath/MyProject.git
@@ -213,11 +214,6 @@ Vous devriez avoir ce type de résultat
 </div>
 </div>
 
-
-
-
-Ici cela me renseigne que le fichier Readme.md a été modifié. **Dans votre cas, vous devriez voir en rouge un dossier slides avec un pdf de slides.**
-
 > Est-ce que le fichier que vous avez ajouté à votre dépôt a été ajouté au projet sur `git.meteo.fr` ?
 > Que comprenez-vous du message renvoyé par la commande ?
 ---
@@ -229,13 +225,15 @@ On va "ajouter" les modifications apportées au fichier et  associer un message 
 
 ```
 git add slides/LeNomDeMonFichier.pdf
-git commit -m "Mon message décrivant les changements"
+git status  # Pour vérifier ce qui va être enregistré dans le "commit"
+git commit -m "Description courte des changements"
 ```
 
 > Votre fichier apparaît-il sur votre dépôt sur `git.meteo.fr`?
 > Consulter l'historique de votre projet (via `git log`). De même consulter l'état du dépôt local (`git status`). Que constatez-vous ?
 
 ---
+<style scoped>section { font-size: 26px; }</style>
 # **F. Pousser les modifications vers la plateforme**
 Maintenant nous pouvons pousser les modifications sur la plateforme.
 
@@ -268,8 +266,7 @@ Attention : <span style="color:red">En cas de conflit (deux utilisateurs modifia
 
 ### Qu'est-ce qu'une branche ?
 - Une **branche** est une version parallèle de votre projet.
-- Elle permet de travailler sur de nouvelles fonctionnalités ou corrections de bugs **sans affecter la branche principale** (nommée `main`). Ainsi, on isole les `bugs` du développement de la branche principale. Cette dernière doit rester fonctionnelle tout au long du projet.
-- Chaque branche possède son propre historique de commits.
+- Elle permet de travailler sur de nouvelles fonctionnalités ou corrections de bugs **sans affecter la branche principale** (souvent nommée `main` ou `master`). Ainsi, on isole les bugs du développement de la branche principale. Cette dernière doit rester fonctionnelle tout au long du projet. - Chaque branche possède son propre historique de commits.
 
 ---
 # **Pourquoi utiliser des branches ?**
@@ -284,15 +281,16 @@ Attention : <span style="color:red">En cas de conflit (deux utilisateurs modifia
  Une fois le travail terminé, les branches peuvent être **fusionnées** (MergeRequest/PullRequest).
 
 ---
+<style scoped>section { font-size: 27px; }</style>
 # **Votre première branche**
 
 Cette fois-ci vous allez devoir chacun
 - Créer une branche (slide suivante)
-- Ajouter/Modifier un (répartissez-vous les tâches) des fichiers suivants dans votre branche :
-  - **Readme.md** : Changer le fichier Readme pour décrire ce que contient le dépôt
+- Ajouter/Modifier dans votre branche un des fichiers suivants (répartissez-vous les tâches)&nbsp;:
+  - **Readme.md** : Changer le fichier Readme pour décrire ce que contient le dépôt.
   - **Commandes.md** : Vous pouvez ajouter quelques commandes utiles (par exemple comment activer votre environnement python, comment en créer un nouveau, comment créer un alias).
   - un fichier **.gitignore** (permet à git de ne pas suivre/montrer tous les fichiers) dans lequel vous ignorerez tous les dossiers `__pycache__`.
-  - Le fichier du tp sur la programmation orientée objet (*guitar.py*).
+  - Le fichier du tp sur la programmation orientée objet (*station.py*).
 
 ---
 # **Création d'une branche**
@@ -305,7 +303,7 @@ Pour cela faire
 <div class="columns">
 <div>
 
-1. `git checkout -b MaBranche`
+1. `git switch -c MaBranche`
 
 >
 2. Ajouter le fichier et un message de commit.
@@ -331,10 +329,11 @@ Aller sur git.meteo.fr. Comment voir votre branche ?
 
 ### Définition
 - Une **Merge Request** (ou **Pull Request** sur GitHub) est une demande d'intégration de code.
-- Elle permet de proposer les modifications d'une branche vers une autre (souvent vers la branche `main` ou `dev`).
+- Elle permet de proposer les modifications d'une branche vers une autre (souvent vers la branche `main` ou `develop`).
 
 ---
 
+<style scoped>section { font-size: 26px; }</style>
 # **Pourquoi utiliser des MergeRequest ?**
 
 1. **Révision de code** :
@@ -366,6 +365,7 @@ Vous pouvez aussi ajouter des camarades responsables de relire et donner leur av
 </div>
 
 ---
+<style scoped>section { font-size: 27px; }</style>
 # **Ajout de commentaires de la part des relecteurs**
 
 Des commentaires peuvent être ajoutés à une MergeRequest (de la part des relecteurs).
@@ -374,20 +374,21 @@ Cela peut être fait pour (par exemple) :
 - Avoir des éclaircissements sur une partie du code
 - ...
 
-C'est un moment `d'interaction` autour de la proposition faite où plusieurs personnes peuvent poser des questions ou indiquer des problèmes (fautes d'orthographe...).
+C'est un moment **d'interaction** autour de la proposition faite où plusieurs personnes peuvent poser des questions ou indiquer des problèmes (fautes d'orthographe...).
 
 > Faites chacun un commentaire sur une MergeRequest d'un autre.
 
 Une fois tous les commentaires pris en compte, une personne (si possible pas celle qui a créé la MR) est responsable de la fusion de la branche.
 
 ---
+<style scoped>section { font-size: 27px; }</style>
 # **Changer de branche**
 
 Une fois que toutes vos merges request ont été effectuées, il vous faudra changer de branche (revenir dans la branche `main`) afin d'avoir l'ensemble des modifications faites par vous et vos camarades.
 
 Pour cela faire :
 ```
-git checkout main
+git switch main
 ```
 > Est-ce que vous voyez les fichiers ajoutés ?
 
@@ -398,21 +399,22 @@ git pull
 afin de tirer les modifications.
 
 
-
 ---
+
+<style scoped>section { font-size: 27px; }</style>
 # **La notion de tag**
 Lorsque vous allez développer votre projet, vous allez toujours "vouloir" ajouter de nouvelles fonctionnalités, ...
 
 Au bout d'un moment, le nombre de commits effectués va être très important (plusieurs milliers) et il va être très difficile de savoir à quel moment vous aviez une version fonctionnelle (et avec quelles fonctionnalités), quand vous avez supprimé (ou cassé) une fonctionnalité.
 
-Pour avoir un "historique" plus exploitable vous pouvez utiliser des tags. Cela constituera les versions du code vers lesquelles vous pourrez vous tourner pour avoir l'état du code comme il était `avec cette fonctionnalité`.
+Pour avoir un "historique" plus exploitable vous pouvez utiliser des tags. Cela constituera les versions du code vers lesquelles vous pourrez vous tourner pour avoir l'état du code comme il était _avec cette fonctionnalité_.
 
-Vous pouvez ajouter des tags directement sur l'interface web.
+Vous pouvez ajouter des tags directement sur l'interface web ou avec `git tag`
 
-> Créez un nouveau tag (par ex v_0.0.0).
+> Créez un nouveau tag (par ex `v_0.0.0`).
 
 ---
-# **Les issues**
+# **Les _issues_**
 
 C'est l'interface d'échange pour rapporter des bugs, discuter/demander de nouvelles fonctionnalités aux développeurs d'un paquet.
 
@@ -426,7 +428,28 @@ Lorsque vous envisagez d'en créer une, commencer par regarder si une issue simi
 - **Description détaillée** : Expliquez le problème rencontré de manière claire.
 - **Étapes pour reproduire le bug** :
   1. Indiquez les étapes précises.
-  2. Fournissez le code, si applicable.
+  2. Fournissez le code le plus court qui reproduise le bug, si applicable.
 - **Résultat attendu** : Décrivez ce que vous pensiez que le programme ferait.
 - **Résultat obtenu** : Ce qui s'est réellement passé, incluant tout message d’erreur.
 - **Version et environnement** : Version du code, version de python et des librairies...
+
+---
+<style scoped>section { font-size: 26px; }</style>
+# **Bonus : commandes pour se repérer**
+
+La plus basique, à user sans modération :
+```
+git status
+```
+Pour voir les branches et les remotes associés :
+```
+git branch -vv
+```
+Un `git log` plus compact et sympathique :
+```
+git log --all --oneline --graph
+```
+Pour pouvoir y accéder sous l'alias `git lg`:
+```
+git config --global alias.lg "log --all --oneline --graph"
+```
