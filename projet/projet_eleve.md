@@ -10,8 +10,11 @@ style: |
   }
    .columns {
     display: grid;
-    grid-template-columns: 2fr 1fr; 
+    grid-template-columns: 2fr 1fr;
     gap: 1rem;
+  }
+  section {
+    padding-top: 20px;
   }
 
 ---
@@ -25,25 +28,25 @@ style: |
 - Développer une application python permettant la lecture de données météo, leur manipulation ainsi que leur visualisation avec une mission globale donnée.
 
 ---
-## Les Missions:
+## Les Missions au choix :
 
 ### 1. Prévision des risques sur cumuls de pluie
-- Fournir des cumuls sur differents intervalles ( ex: 1H, 6H 12H et 24H ) 
-- Créer un risque en fonction d'une combinaison de seuil (ex : RR1 > 10mm). 
-  
-  
+- Fournir des cumuls sur différents intervalles ( ex: 1h, 6h 12h et 24h )
+- Créer un risque en fonction d'une combinaison de seuils (ex : RR1 > 10mm).
+
+
 
 ### 2. Humidex et Windchill
-- Création des indicateurs de température ressentie. 
-Le premier est utilisé en période estivale. Le second en période hivernale. 
+- Création des indicateurs de température ressentie.
+Le premier est utilisé en période estivale. Le second en période hivernale.
 
 ---
 
-### 3. Facteur de charge éolien 
-- Calculer le facteur de charge prévu d'une éolienne en fonction de la force du vent. 
+### 3. Facteur de charge éolien
+- Calculer le facteur de charge prévu d'une éolienne en fonction de la force du vent.
 
-### 4. Synthése de données météorologiques 
-- Mettre en place l'équivalent de l'application web de MétéoFrance pour une zone donnée (ou autre par ex bulletin météo à portée nationale).
+### 4. Synthèse de données météorologiques
+- Mettre en place l'équivalent de l'application web de MétéoFrance pour une zone donnée (ou autre, par exemple bulletin météo à portée nationale).
 
 
 
@@ -51,12 +54,12 @@ Pour chacune de ces missions, il faudra développer des visualisations spécifiq
 
 ---
 # **Les données à dispositions**
-Vous disposerez de trois types de données : 
-- des données de prévision déterministe AROME à 1.3km de résolution (grille EUR1S100) pour des échéances allant jusqu'à 50h. 
+Vous disposerez de trois types de données :
+- des données de prévision déterministe AROME à 1.3km de résolution (grille EUR1S100) pour des échéances allant jusqu'à 50h.
 **Nomenclature** : `arome_forecast_{day.strftime('%Y%m%d%H')}.nc`
-- des données de prévision ensembliste AROME à 2.5 km de résolution (grille EUR1S040) pour des échéances allant jusqu'à 50H. L'ensemble possède 25 membres différents. Chaque membre est dans un fichier spécifique. 
-**Nomenclature** : `arome_forecast_{day.strftime('%Y%m%d%H')}_mb_{str(X).zfill(3)}.nc` où X est le numéro du membre. 
-- des masques (remplis de 1 et de NaN) délimitant différents types de zones géographiques (avec ou non un nom). 
+- des données de prévision ensembliste AROME à 2.5 km de résolution (grille EUR1S040) pour des échéances allant jusqu'à 50h. L'ensemble possède 25 membres différents. Chaque membre est dans un fichier spécifique.
+**Nomenclature** : `arome_forecast_{day.strftime('%Y%m%d%H')}_mb_{str(X).zfill(3)}.nc` où X est le numéro du membre.
+- des masques (remplis de 1 et de NaN) délimitant différents types de zones géographiques (avec ou non un nom).
 
 ---
 # **Contenu des fichiers AROME**
@@ -66,25 +69,25 @@ Vous disposerez de trois types de données :
 - r2 : Humidité relative (en %)
 - prmsl : Pression ramenée au niveau de la mer (en Pa)
 - u10/v10 : composantes du vent à 10m (en m/s)
-- efg10/nfg10 : Composantes rafales à 10 m  (en m/s)
+- efg10/nfg10 : Composantes rafales à 10 m (en m/s)
 
 ---
-# **Les masques** 
-Trois types de masques sont disponibles (sur la France Métropolitaine) : 
-- Les masques de zones climatiques homogènes. Il sont dénommés 
+# **Les masques**
+Trois types de masques sont disponibles (sur la France Métropolitaine) :
+- Les masques de zones climatiques homogènes. Il sont dénommés
   `zones_clim_{X}.nc` où `X` varie en fonction de la zone.
-- Les masques de redécoupage de département (zones sympos). 
-Ils sont dénommés `sympo_{Y}.nc` où Y est le département. 
-- Des masques sur des Bassins Versants. Pour ce dernier jeu de masques, deux niveaux emboîtés sont fournis.
-    - `bassin_level1.nc` : Contient les 24 bassins versant sur la métropole 
-  - `bassin_level2_zone_{X}.nc` : Contient les bassins versant de la sous-zone `{X}`. 
+- Les masques de redécoupage de département (zones sympos).
+Ils sont dénommés `sympo_{Y}.nc` où Y est le département.
+- Des masques sur des bassins versants. Pour ce dernier jeu de masques, deux niveaux emboîtés sont fournis.
+  - `bassin_level1.nc` : Contient les 24 bassins versants sur la métropole.
+  - `bassin_level2_zone_{X}.nc` : Contient les bassins versant de la sous-zone `{X}`.
 
-Chaque fichier contients plusieurs masques sur une zones données. 
+Chaque fichier contient plusieurs masques sur une zone donnée.
 
 ---
-# **Les grilles** 
-Chaque fichier de masques contient l'emprise des zones géographiques pour différentes grilles. 
-Avec les données AROME nous n'utiliseront que les grilles `eurw1s100` et `eurw1s40`. 
+# **Les grilles**
+Chaque fichier de masques contient l'emprise des zones géographiques pour différentes grilles.
+Avec les données AROME nous n'utiliserons que les grilles `eurw1s100` et `eurw1s40`.
 
 ---
 # **Visualisation des Masques (Zones sympo pour le 31)**
@@ -93,16 +96,16 @@ Avec les données AROME nous n'utiliseront que les grilles `eurw1s100` et `eurw1
 
 ```python
 import xarray as xr
-import matplotlib.pyplot as plt  
+import matplotlib.pyplot as plt
 path = "MYPATH/masks/Sympo/sympo_31.nc"
 ds = xr.open_dataset(path)
-ds = ds.set_coords("areaName") # Met le nom en coord
-# Change de coordonnée
-ds = ds["eurw1s100"].swap_dims({"id":"areaName"})
+ds = ds.set_coords("areaName")  # Transforme la variable "areaName" en coord.
+# Change de coordonnées
+ds = ds["eurw1s100"].swap_dims({"id": "areaName"})
 # Affiche l'ensemble des masques du fichier (en fonction
-# de la coordonée areaName). 
-ds.plot(col="areaName",col_wrap=3)
-plt.show() 
+# de la coordonée areaName).
+ds.plot(col="areaName", col_wrap=3)
+plt.show()
 ```
 </div>
 <div>
@@ -123,7 +126,7 @@ plt.show()
 ---
 
 2. **Création de la structure des dossiers du projet** :
-   
+
    **Nom_de_mon_application**/
    ├── /**sources**/
    │   ├── **`__init__`.py**
@@ -136,17 +139,17 @@ plt.show()
    ├── **requirements.txt**
    └── **README.md**
 
-   - Ne créer que les choses en **GRAS** !!
+   - Ne créez que les choses en **GRAS** !!
 ---
 
-   - Assurez-vous d'inclure un fichier `requirements.txt` contenant toutes les dépendances du projet.( liste des bibliothèques )
+   - Assurez-vous d'inclure un fichier `requirements.txt` contenant toutes les dépendances du projet ( liste des bibliothèques )
 
    - Ajoutez au '.gitignore' la ligne '__pycache__/' ainsi que '*.nc'.
-   
+
 ---
 
 3. **Initialisation de Git** :
-   - Initialisez un référentiel Git pour le projet.
+   - Initialisez un dépôt Git pour le projet.
    - Effectuez un premier commit pour sauvegarder la structure de base du projet.
 
 ### **Objectifs :**
@@ -159,10 +162,10 @@ plt.show()
 
 ### **Cahier des charges :**
 1. **Loader** :
-   - Créez, au travers d'une classe, un objet Loader capable de :
-        - prendre en entrée un chemin vers un fichier NetCDF et en faire un dataset xarray.
-        - prendre en entrée une liste de fichier NetCFD et en faire un dataset xarray.
-        - Ajoutez la possibilité de prétraiter les données en sélectionnant certaines partie des données via un fichier de masque extérieur .
+   - Créez, au travers d'une classe `Loader`, un objet capable de :
+        - Prendre en entrée un chemin vers un fichier NetCDF et en faire un dataset xarray.
+        - Prendre en entrée une liste de fichier NetCDF et en faire un dataset xarray.
+        - Prétraiter les données en sélectionnant certaines partie des données via un fichier de masque extérieur.
 
 ---
 1. **Testez la classe** :
@@ -173,13 +176,14 @@ plt.show()
 
 ## **Module 3 : Manipulation et Analyse des Données**
 
-Créez un object capable de manipuler vos données en fonction des besoins de votre mission.
+Créez un objet capable de manipuler vos données en fonction des besoins de votre mission.
 
 Vous pouvez commencer par discuter en groupe et écrire le détail des fonctionnalité que vous allez devoir implémenter pour mener à bien vos objectifs.
 
---- 
 
-<!-- 
+<!--
+---
+
 ### **Cahier des charges :**
 1. **Classe `WeatherDataManipulator`** :
    - Créez une classe `WeatherDataManipulator` qui permet de filtrer les données en fonction d’une plage temporelle (par exemple, janvier 2024).
@@ -266,11 +270,11 @@ Vous pouvez commencer par discuter en groupe et écrire le détail des fonctionn
 - Tester le code pour assurer sa fiabilité.
 - Préparer l'application pour sa distribution et son déploiement.
 
+---  -->
+
 ---
 
 ### **Consignes générales pour chaque module :**
 - **Commentaires et documentation** : Chaque classe et fonction doit être bien documentée. Commentez votre code pour expliquer ce que chaque partie fait.
 - **Propreté du code** : Votre code doit être lisible, bien structuré et suivre les bonnes pratiques de programmation Python (PEP 8).
 - **Modularité** : Divisez votre code en petites fonctions ou méthodes qui réalisent des tâches spécifiques, ce qui rendra votre code plus maintenable et réutilisable.
-
----  -->
