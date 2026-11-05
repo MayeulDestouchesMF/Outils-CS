@@ -60,6 +60,7 @@ Pour ces raisons, il est devenu **un outil incontournable** dans presque tous le
   - Git permet de collaborer sur un projet à plusieurs de manière structurée.
 
 ---
+<style scoped>section { font-size: 26px; }</style>
 # **Git dans la pratique**
 > Imaginez que vous travaillez sur un projet durant quelques semaines puis faites un break. Deux mois plus tard, vous reprenez le projet ... Malheureusement, le code que vous avez ne fonctionne plus...
 
@@ -74,6 +75,7 @@ Pour ces raisons, il est devenu **un outil incontournable** dans presque tous le
 
 
 ---
+<style scoped>section { font-size: 26px; }</style>
 # **Git vs GitHub/GitLab/Bitbucket**
 
 ### **Git : Le logiciel**
@@ -116,7 +118,7 @@ git config --global --unset http.proxy
 > password : NeJamaisDonnerSonPassword
 
 
-Vous allez maintenant devoir vous mettre en groupe de 3 ou 4 étudiants (pour le tiers 1) ou de 4 étudiants (pour les tiers 2 et 3).
+Vous allez maintenant devoir vous mettre en groupe de 3 ou 4 étudiants.
 
 <span style="color:red;">
 Les professeurs devront vous ajouter manuellement au bon projet git.
@@ -126,22 +128,15 @@ Les professeurs devront vous ajouter manuellement au bon projet git.
 # **B. Aller sur le dépôt du projet et cloner le dépôt**
 
 
-<div class="same_columns">
 <div>
 
-![width:300](figures/demoProject.png)
-
-</div>
-<div>
-
-![width:400](figures/clone.png)
+![width:1200](figures/clone.png)
 
 
-</div>
 </div>
 
 ```
-git clone https://git.meteo.fr/enm/eleves/ienm_2024-2027/cours_cs/gpX-Y.git
+git clone https://git.meteo.fr/enm/eleves/ienm_2026-2029/cours_cs/gpX-Y.git
 ```
 
 ---
@@ -151,9 +146,11 @@ Il existe plusieurs moyens pour ne pas rentrer son password plusieurs fois :
 - Garder en cache le password `git config credential.helper 'cache --timeout=3600'
 `
 Ici vous n'aurez besoin de rentrer votre password que toutes les heures.
+Avec `store` au lieu de `cache --timeout=3600`, le password ne vous sera demandé qu'une fois.
 - Générer un token et l'ajouter dans la configuration du dépôt (slide suivante)
 
 ---
+<style scoped>section { font-size: 25px; }</style>
 # **Génération de token**
 <div class="columns">
 <div>
@@ -199,6 +196,7 @@ Pour cela :
 
 
 ---
+<style scoped>section { font-size: 26px; }</style>
 # **D. Consulter l'état du dépôt**
 Nous allons maintenant consulter l'état de "l’arbre de travail"
 Pour cela faire `git status` .
