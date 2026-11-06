@@ -293,12 +293,14 @@ conditional_mean(ds, lats, lons, altitude)
 
 >3. Calculer la moyenne glissante (sur 3h) pour la zone autour de Grenoble. (Indication : utiliser la fonctionnalité `rolling` de  `xarray`)
 
+---
 
+<style scoped>section { font-size: 25px; }</style>
+
+# **Exercices - A rendre**
 
 Le dossier `/home/newton/horsenm/destouchesm/COURS_CS/data` contient un fichier `grid_arpege.nc`. Ce fichier contient une unique variable `glob0125` donnant une information d'altitude sur le domaine AROME pour ARPEGE (modèle global). La résolution de l'orographie est ici de 0.125° (~12.5 km), résolution bien plus lâche que celle d'AROME (~1.3km).
-
----
-# **Exercices - A rendre**
+L'orographie utilisée par AROME est quant à elle disponible dans le fichier `arome_forecast_2024100900.nc` étudié dans ce TP.
 
 >4.a. Faire une figure montrant l'orographie des deux modèles (AROME et ARPEGE). Qu'observe-t-on ? Que pouvez vous dire de l'altitude maximum sur chacune de ces cartes ?
 
